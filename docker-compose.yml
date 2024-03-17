@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  keycloak:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: keycloak
+    restart: unless-stopped
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=db
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+    ports:
+      - "8099:8080"
+    depends_on:
+      - db
+    networks:
+      - keycloak-network
+
+  db:
+    image: postgres:latest
+    container_name: postgres_keycloak
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    networks:
+      - keycloak-network
+
+networks:
+  keycloak-network:
+    driver: bridge
+
