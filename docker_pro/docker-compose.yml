@@ -16,8 +16,8 @@ services:
       - DB_DATABASE=keycloak
       - DB_USER=keycloak
       - DB_PASSWORD=keycloak
-#    ports:
-#      - "8099:8080"
+    ports:
+      - "8099:8080"
     depends_on:
       - postgres
     networks:
