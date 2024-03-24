@@ -45,7 +45,7 @@ services:
     container_name: nginx_container
     ports:
       # Port FastAPI
-      - "80:80"
+      - "8087:80"
       - "443:443"
       - "8080:8080"
     restart: always
