@@ -48,7 +48,8 @@ services:
     restart: always
     networks:
       - keycloak-network
-
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
 
 networks:
   keycloak-network:
