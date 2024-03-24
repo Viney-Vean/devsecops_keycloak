@@ -1,0 +1,61 @@
+version: '3.9'
+
+services:
+  keycloak:
+    build:
+      context: ..
+      dockerfile: docker_pro/keycloak.Dockerfile
+    container_name: keycloak_container
+    restart: unless-stopped
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=db
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+#    ports:
+#      - "8099:8080"
+    depends_on:
+      - db
+    networks:
+      - keycloak-network
+
+  postgres:
+    build:
+      context: ..
+      dockerfile: docker_pro/postgres.Dockerfile
+    container_name: postgres_container
+    restart: always
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - keycloak-network
+
+  nginx:
+    build:
+      context: ..
+      dockerfile: docker_pro/nginx.Dockerfile
+    container_name: nginx_container
+    ports:
+      # Port Keycloak
+      - "80:80"
+      - "443:443"
+      - "5454:5432"
+    restart: always
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+
+networks:
+  keycloak-network:
+    driver: bridge
+
+volumes:
+  db_data:
+  nginx_data:
