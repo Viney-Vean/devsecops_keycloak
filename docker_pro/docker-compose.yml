@@ -38,6 +38,24 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  nginx:
+    build:
+      context: ..
+      dockerfile: docker_pro/nginx.Dockerfile
+    container_name: nginx_container
+    ports:
+      # Port FastAPI
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    restart: always
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+    networks:
+      - keycloak-network
+
 networks:
   keycloak-network:
     driver: bridge
