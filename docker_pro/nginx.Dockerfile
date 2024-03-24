@@ -8,7 +8,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy NGINX configuration file to conf.d, this block is for http configuration
 COPY ../requirements/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ../requirements/nginx/keycloak.conf /etc/nginx/keycloak.conf
+#COPY ../requirements/nginx/keycloak.conf /etc/nginx/keycloak.conf
 
 # Copy NGINX configuration stream file to streamconf.d, this block is for stream configuration
 #COPY ../requirements/nginx/postgres.conf /etc/nginx/stream_conf.d/postgres.conf
