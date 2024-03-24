@@ -23,7 +23,6 @@ services:
     networks:
       - keycloak-network
 
-
   db:
     image: postgres:latest
     container_name: postgres_keycloak

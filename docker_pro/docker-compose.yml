@@ -24,9 +24,7 @@ services:
       - keycloak-network
 
   db:
-    build:
-      context: ..
-      dockerfile: docker_pro/postgres.Dockerfile
+    image: postgres:latest
     container_name: postgres_container
     restart: unless-stopped
     environment:
@@ -44,15 +42,12 @@ services:
       dockerfile: docker_pro/nginx.Dockerfile
     container_name: nginx_container
     ports:
-      # Port FastAPI
-      - "8087:80"
-      - "443:443"
-      - "8080:8080"
+      # Port Keycloak
+      - "9099:9099"
     restart: always
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
     networks:
       - keycloak-network
+
 
 networks:
   keycloak-network:
