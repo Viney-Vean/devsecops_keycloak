@@ -59,3 +59,4 @@ networks:
 volumes:
   db_data:
   nginx_data:
+  postgres_data:
