@@ -11,7 +11,7 @@ COPY ../requirements/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ../requirements/nginx/keycloak.conf /etc/nginx/keycloak.conf
 
 # Copy NGINX configuration stream file to streamconf.d, this block is for stream configuration
-COPY ../requirements/nginx/postgres.conf /etc/nginx/stream_conf.d/postgres.conf
+#COPY ../requirements/nginx/postgres.conf /etc/nginx/stream_conf.d/postgres.conf
 
 # Start NGINX when the container starts
 CMD ["nginx", "-g", "daemon off;"]
