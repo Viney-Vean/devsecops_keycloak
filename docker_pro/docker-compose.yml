@@ -19,7 +19,7 @@ services:
 #    ports:
 #      - "8099:8080"
     depends_on:
-      - db
+      - postgres
     networks:
       - keycloak-network
 
