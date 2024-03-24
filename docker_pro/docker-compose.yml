@@ -51,8 +51,6 @@ services:
     restart: always
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-    depends_on:
-      - db
     networks:
       - keycloak-network
 
